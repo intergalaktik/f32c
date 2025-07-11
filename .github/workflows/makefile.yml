@@ -32,10 +32,13 @@ jobs:
 
     - name: Add compiler to PATH and build
       run: |
-        export PATH=$PATH:/home/work/.arduino15/packages/FPGArduino/tools/f32c-compiler/1.0.0/bin/
-        export LIBDIR=/home/work/f32c/src/tools/build-lib
-        ls /home/work/f32c
-        ls /home/work/f32c/src
+        export PATH=$PATH:/home/runner/.arduino15/packages/FPGArduino/tools/f32c-compiler/1.0.0/bin/
+        export LIBDIR=/home/runner/work/f32c/f32c/src/tools/build-lib
+        ls /home/runner/.arduino15
+        ls /home/runner/work/.arduino15
+        ls /home/runner/work/f32c/f32c/
+        ls /home/runner/work/f32c/f32c/src
         cd ../lib/src
+        pwd
         make clean
         make all_libs
