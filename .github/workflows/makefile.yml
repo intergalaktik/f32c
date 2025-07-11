@@ -35,7 +35,6 @@ jobs:
         export PATH=$PATH:/home/runner/.arduino15/packages/FPGArduino/tools/f32c-compiler/1.0.0/bin/
         export LIBDIR=/home/runner/work/f32c/f32c/src/tools/build-lib
         ls /home/runner/.arduino15
-        ls /home/runner/work/.arduino15
         ls /home/runner/work/f32c/f32c/
         ls /home/runner/work/f32c/f32c/src
         cd ../lib/src
