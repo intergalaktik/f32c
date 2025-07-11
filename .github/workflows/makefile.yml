@@ -31,4 +31,4 @@ jobs:
         . ./makefiles.sh      
         export PATH=$PATH:/home/runner/.arduino15/packages/FPGArduino/tools/f32c-compiler/1.0.0/bin/
         cd /home/runner/work/f32c/f32c/src/lib/src
-        make all_libs
+        make
