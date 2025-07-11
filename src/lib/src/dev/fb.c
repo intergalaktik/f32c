@@ -201,6 +201,7 @@ fb_set_mode(const struct modeline *ml, int flags)
 		fb_plotfn_off = plot_bpp_24;
 		break;
 	default:
+		break;
 		/* turn off the video */
 #ifdef COMPOSITING2
 		OUTW(IO_C2VIDEO_BASE, NULL);
@@ -332,14 +333,15 @@ fb_rectangle(int x0, int y0, int x1, int y1, int color)
 		y1 = fb_vdisp - 1;
 
 	switch (fb_bpp_code) {
-	case FB_BPP_8:
+	case FB_BPP_8:{
 		uint8_t *fb8 = (void *) fb_active;
 		l = x1 - x0 + 1;
 		i = y0 * fb_hdisp + x0;
 		for (; y0 <= y1; y0++, i += fb_hdisp)
 			memset(&fb8[i], color, l);
 		return;
-	case FB_BPP_16:
+	}
+	case FB_BPP_16:{
 		uint16_t *fb16 = (void *) fb_active;
 		color = (color << 16) | (color & 0xffff);
 		for (; y0 <= y1; y0++) {
@@ -361,7 +363,8 @@ fb_rectangle(int x0, int y0, int x1, int y1, int color)
 				fb16[i++] = color;
 		}
 		return;
-	case FB_BPP_24:
+	}
+	case FB_BPP_24:{
 		uint32_t *fb32 = (void *) fb_active;
 		for (; y0 <= y1; y0++) {
 			i = y0 * fb_hdisp + x0;
@@ -376,13 +379,18 @@ fb_rectangle(int x0, int y0, int x1, int y1, int color)
 				fb32[i] = color;
 		}
 		return;
+	}
 	case FB_BPP_1:
 		color = (color << 1) | (color & 0x1);
+		break;
 	case FB_BPP_2:
 		color = (color << 2) | (color & 0x3);
+		break;
 	case FB_BPP_4:
 		color = (color << 4) | (color & 0xf);
+		break;
 	default:
+		break;
 	}
 
 	if (fb_bpp == 1)

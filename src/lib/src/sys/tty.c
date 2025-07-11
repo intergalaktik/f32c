@@ -107,6 +107,7 @@ tty_iproc(struct tty *tty, int c)
 		}
 		break;
 	default:
+		break;
 	}
 	return (c);
 }
