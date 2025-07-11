@@ -1,0 +1,41 @@
+name: Build f32c toolchain
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install Arduino CLI
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+        sudo mv bin/arduino-cli /usr/local/bin/
+
+    - name: Configure Arduino CLI
+      run: |
+        arduino-cli config init
+        arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/f32c/fpgarduino/master/package_f32c_core_index.json
+        arduino-cli core update-index
+        arduino-cli core install FPGArduino:f32c
+
+    - name: Set environment for make
+      run: |
+        cd src/tools
+        . ./makefiles.sh
+
+    - name: Add compiler to PATH and build
+      run: |
+        export PATH=$PATH:/home/work/.arduino15/packages/FPGArduino/tools/f32c-compiler/1.0.0/bin/
+        export LIBDIR=/home/work/f32c/src/tools/build-lib
+        ls /home/work/f32c
+        ls /home/work/f32c/src
+        cd ../lib/src
+        make clean
+        make all_libs
