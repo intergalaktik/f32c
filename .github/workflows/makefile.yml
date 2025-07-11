@@ -25,14 +25,10 @@ jobs:
         arduino-cli core update-index
         arduino-cli core install FPGArduino:f32c
 
-    - name: Set environment for make
-      run: |
-        cd /home/runner/work/f32c/f32c/src/tools
-        . ./makefiles.sh
-        ls /home/runner/work/f32c/f32c/src/tools/../conf/f32c.mk
-
     - name: Add compiler to PATH and build
       run: |
+        cd /home/runner/work/f32c/f32c/src/tools
+        . ./makefiles.sh      
         export PATH=$PATH:/home/runner/.arduino15/packages/FPGArduino/tools/f32c-compiler/1.0.0/bin/
         cd /home/runner/work/f32c/f32c/src/lib/src
         make all_libs
