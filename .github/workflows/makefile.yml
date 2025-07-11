@@ -29,6 +29,7 @@ jobs:
       run: |
         cd /home/runner/work/f32c/f32c/src/tools
         . ./makefiles.sh
+        ls /home/runner/work/f32c/f32c/src/tools/../conf/f32c.mk
 
     - name: Add compiler to PATH and build
       run: |
