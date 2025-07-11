@@ -27,7 +27,7 @@ jobs:
 
     - name: Set environment for make
       run: |
-        cd src/tools
+        cd /home/runner/work/f32c/f32c/src/tools
         . ./makefiles.sh
 
     - name: Add compiler to PATH and build
